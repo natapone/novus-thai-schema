@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/novus-thai-schema.t
+lib/novus/thai/schema.pm
