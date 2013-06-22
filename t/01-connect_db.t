@@ -50,3 +50,14 @@ while (my $feed = $feeds->next) {
 my @feed_result = (1, 9, 10, 26, 55, 60, 67, 72, 78, 101, 103, 111, 121);
 is_deeply(\@feed_read, \@feed_result, "Return feeds of category correctly");
 
+# too much
+$feed = $schema->resultset('Feed')->find(2);
+print "feed id= ", $feed->id, ": ", $feed->title, "\n";
+my $feed_items = $feed->items;
+$feed_items = $feed_items->search({}, {rows => 5});
+while (my $feed_item = $feed_items->next) {
+    print $feed_item->id, ": ", $feed_item->title, "\n";
+}
+
+
+

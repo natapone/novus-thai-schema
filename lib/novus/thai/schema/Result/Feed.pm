@@ -125,6 +125,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many('feed_categories' => 'novus::thai::schema::Result::FeedCategory', { "foreign.feedid" => "self.id" }, {join_type => 'left'});
 __PACKAGE__->many_to_many('categories' => 'feed_categories', 'category');
+__PACKAGE__->has_many('items' => 'novus::thai::schema::Result::Item', { "foreign.feedid" => "self.id" }, {join_type => 'left'});
 
 # Created by DBIx::Class::Schema::Loader v0.07033 @ 2012-12-16 19:50:18
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uwq2RwfVaQFelcCP29NWgg
