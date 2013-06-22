@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Test::More tests => 5;
+use Test::More tests => 7;
 BEGIN { use_ok('novus::thai::schema') };
 
 use novus::thai::schema;
@@ -47,17 +47,21 @@ while (my $feed = $feeds->next) {
     push(@feed_read, $feed->id);
 }
 
-my @feed_result = (1, 9, 10, 26, 55, 60, 67, 72, 78, 101, 103, 111, 121);
+my @feed_result = (1, 9, 10, 26, 55, 60, 67, 72, 78, 128, 142, 101, 103, 111, 121);
 is_deeply(\@feed_read, \@feed_result, "Return feeds of category correctly");
 
-# too much
-$feed = $schema->resultset('Feed')->find(2);
-print "feed id= ", $feed->id, ": ", $feed->title, "\n";
-my $feed_items = $feed->items;
-$feed_items = $feed_items->search({}, {rows => 5});
-while (my $feed_item = $feed_items->next) {
-    print $feed_item->id, ": ", $feed_item->title, "\n";
-}
+my $item = $schema->resultset('Item')->find(1);
+is ($item->feed->title, 'CITYLIFE', "get feed title from item correctly");
+is ($item->feed->source->name, 'daradaily', "get source name from item correctly");
+
+## too much
+#$feed = $schema->resultset('Feed')->find(2);
+#print "feed id= ", $feed->id, ": ", $feed->title, "\n";
+#my $feed_items = $feed->items;
+#$feed_items = $feed_items->search({}, {rows => 5});
+#while (my $feed_item = $feed_items->next) {
+#    print $feed_item->id, ": ", $feed_item->title, "\n";
+#}
 
 
 

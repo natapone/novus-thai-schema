@@ -164,6 +164,7 @@ __PACKAGE__->set_primary_key("id");
 =cut
 
 __PACKAGE__->add_unique_constraint("item_link_key", ["link"]);
+__PACKAGE__->has_one('feed' => 'novus::thai::schema::Result::Feed', { "foreign.id" => "self.feedid" });
 
 
 # Created by DBIx::Class::Schema::Loader v0.07033 @ 2012-12-26 14:38:47
