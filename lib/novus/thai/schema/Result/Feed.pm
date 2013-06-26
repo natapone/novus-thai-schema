@@ -137,6 +137,11 @@ Fetch xml from feed url and save as text file
 
 =cut
 
+sub config {
+    my $config = novus::thai::utils->get_config();
+    return $config;
+}
+
 sub fetch {
     my ($self, $path) = @_;
 #    $self->result_source->schema->resultset('AreaFeed')->find_or_create({
@@ -144,7 +149,8 @@ sub fetch {
 #        area => $areaid,
 #    });
     
-    $path = "/home/dong/src/NPC/novus_thai_data";
+    my $config = $self->config;
+    $path = $config->{'novus-thai-root'}.'/novus_thai_data';
     
 #    print Dumper($self->_get_link($self->link)) ;
     
